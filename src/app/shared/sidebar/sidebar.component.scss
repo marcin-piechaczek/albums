@@ -1,0 +1,14 @@
+.sidebar__nav {
+  min-width: 220px;
+}
+
+.sidebar__content__wrapper {
+  height: calc(100vh - 64px);
+  @media (max-width: 599px) {
+    height: calc(100vh - 56px);
+  }
+}
+
+.sidebar__list__icon {
+  margin-right: 0.3em;
+}

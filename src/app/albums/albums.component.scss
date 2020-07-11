@@ -1,0 +1,50 @@
+.block--center {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.table {
+  width: 100%;
+  &__actions {
+    display: flex;
+  }
+  &__id {
+    &__id__element {
+      width: 10%;
+    }
+  }
+  &__title {
+    &__element {
+      width: 70%;
+    }
+  }
+  &__actions {
+    &__element {
+      width: 20%;
+      min-width: 100px;
+      &__button {
+        margin: 0 0.3em;
+      }
+    }
+  }
+}
+
+.table__header {
+  display: flex;
+  @media (max-width: 612px) {
+    flex-direction: column;
+  }
+  &__search {
+    @media (max-width: 612px) {
+      margin: 20px;
+    }
+  }
+  &__add {
+    &__button {
+      margin: 0 20px;
+    }
+  }
+}

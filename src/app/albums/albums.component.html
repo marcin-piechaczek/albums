@@ -1,0 +1,55 @@
+<div class="block--center" *ngIf="isLoading | async">
+  <mat-spinner class="loader" diameter="20"></mat-spinner>
+</div>
+
+<div class="block--center" *ngIf="albumsError$ | async">
+  <h1>Ups...</h1>
+  <h2>An error occurred while processing your request. Please try again.</h2>
+</div>
+
+<div [hidden]="isLoading | async" style="margin: 40px 0">
+  <div class="table__header">
+    <div class="table__header_add">
+      <button class="table__header__add__button"  (click)="createAlbum()" mat-raised-button>Add new album</button>
+    </div>
+    <div class="table__header__search">
+      <mat-form-field class="form-field">
+        <mat-label>Search...</mat-label>
+        <label>
+          <input name="search" matInput [(ngModel)]="search" (keyup)="applyFilter(search)" type="search">
+        </label>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="applyFilter(null)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <table class="table" mat-table matSort [dataSource]="albums$">
+
+    <!-- Id -->
+    <ng-container class="table__id" matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id.</th>
+      <td class="table__id__element" mat-cell *matCellDef="let element"> {{ element.id }}</td>
+    </ng-container>
+
+    <!-- Title -->
+    <ng-container class="table__title" matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
+      <td class="table__title__element" mat-cell *matCellDef="let element"> {{ element.title }} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container class="table__actions" matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+      <td class="table__actions__element" mat-cell *matCellDef="let element">
+        <button (click)="editAlbum(element)" class="table__actions__element__button" mat-icon-button><mat-icon>edit</mat-icon></button>
+        <button (click)="deleteAlbum(element.id)" class="table__actions__element__button" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

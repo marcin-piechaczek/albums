@@ -1,0 +1,21 @@
+<div class="form-dialog">
+  <h2 mat-dialog-title>{{ action }}</h2>
+
+  <mat-dialog-content [formGroup]="form">
+
+    <mat-form-field class="form-dialog__title">
+      <label>
+        <input matInput
+               placeholder="Title"
+               formControlName="title">
+      </label>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="form-dialog__actions">
+    <button class="form-dialog-actions__button" (click)="close()" mat-raised-button>Close</button>
+    <button class="form-dialog-actions__button" [mat-dialog-close]="true" [disabled]="!form.valid" (click)="save()" mat-raised-button color="primary">Save</button>
+  </mat-dialog-actions>
+
+</div>
